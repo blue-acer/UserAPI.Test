@@ -19,6 +19,7 @@ namespace UserAPI.Test
             user1.FirstName = "Jane";
             user1.LastName = "Doe";
             user1.EmailAddress = "jane.doe@test.com";
+            
             var user2 = new UserDetails();
             user2.FirstName = "John";
             user2.LastName = "Smith";
@@ -52,6 +53,7 @@ namespace UserAPI.Test
             user1.FirstName = "Jane";
             user1.LastName = "Doe";
             user1.EmailAddress = "jane.doe@test.com";
+            
             var user2 = new UserDetails();
             user2.FirstName = "John";
             user2.LastName = "Smith";
@@ -134,19 +136,15 @@ namespace UserAPI.Test
             //Arrange
             var mockInterface = new Mock<IUserDetailsRepository>();
 
-            var user1 = new UserDetails();
-            user1.FirstName = "Jane";
-            user1.LastName = "Doe";
-            user1.EmailAddress = "jane.doe@test.com";
-            user1.UserId = 1;
+            var userId = 1;
 
             mockInterface.Setup(x =>
-            x.deleteUserData(user1.UserId)).ReturnsAsync(1);
+            x.deleteUserData(userId)).ReturnsAsync(1);
 
             var controller = new UserDetailsController(mockInterface.Object);
 
             //Act
-            var usersResult = await controller.DeleteUser(user1.UserId);
+            var usersResult = await controller.DeleteUser(userId);
 
             //Assert
             var result = usersResult.Result as OkObjectResult;
